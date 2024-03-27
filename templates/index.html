@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <h3> <b><i>{{ user_name }}</i></b>'s Portfolio</h3>
+    <br>
+    <table class='table table-primary table-striped'>
+        <thead>
+            <tr>
+                <th>Stock's Symbol</th>
+                <th>Buy/Sell</th>
+                <th>Shares Owned</th>
+                <th>Current Price</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td>{{ stock['symbol'] }}</td>
+                <td>
+                    <div class="row justify-content-md-center">
+                        <div class="col-4">
+                            <form action="/" method="post">
+                                <div class="input-group mb-1">
+                                    <button class="btn btn-warning" type="submit" id="button-addon1">Buy</button>
+                                    <input name="shares" type="text" class="form-control" placeholder="Shares to Buy" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                    <input name="symbol_buy" type="hidden" value="{{ stock.symbol }}">
+                                </div>
+                            </form>
+                        </div>
+                        <!-- <div class="w-50"> -->
+                        <div class="col-4">
+                            <form action="/" method="post">
+                                <div class="input-group mb-1">
+                                    <button class="btn btn-success" type="submit" id="button-addon1">Sell</button>
+                                    <input name="shares" type="text" class="form-control" placeholder="Shares to Sell" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                    <input name="symbol_sell" type="hidden" value="{{ stock.symbol }}">
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </td>
+                    <td>{{ stock['shares'] }}</td>
+                    <td>{{ stock['price'] | usd }}</td>
+                    <td>{{ stock['value'] | usd }}</td>
+            </tr>
+            {% endfor %}
+            <tr class='table-warning'>
+                <th colspan="4">Stocks' Total Value</th>
+                <td>{{ stock_total_value | usd }}</td>
+            </tr>
+            <tr class='table-info'>
+                <th colspan="4">Current Cash</th>
+                <td>{{ cash | usd }}</td>
+            </tr>
+            <tr class='table-success'>
+                <th colspan="4">Stocks' Total Value + Cash</th>
+                <td>{{ grand_value | usd }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

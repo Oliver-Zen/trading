@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <h3> <b><i>{{ user_name }}</i></b>'s Transactions</h3>
+    <br>
+    <table class="table">
+        <thead>
+            <tr class="table-secondary" >
+                <th>Transaction Type</th>
+                <th>Stock's Symbol</th>
+                <th>Purchase/Sell Price</th>
+                <th>Shares</th>
+                <th>Date & Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+                {% if transaction.shares > 0 %}
+                    <tr class="table-warning">
+                        <td>Purchase</td>
+                        <td> {{ transaction.symbol }} </td>
+                        <td> {{ transaction.price | usd }} </td>
+                        <td> {{ transaction.shares }} </td>
+                        <td> {{ transaction.datetime }} </td>
+                    </tr>
+                {% else %}
+                    <tr class="table-success">
+                        <td>Sale</td>
+                        <td> {{ transaction.symbol }} </td>
+                        <td> {{ transaction.price | usd }} </td>
+                        <td> {{ transaction.shares | _abs }} </td>
+                        <td> {{ transaction.datetime }} </td>
+                     </tr>
+                {% endif %}
+            {% endfor%}
+        </tbody>
+    </table>
+{% endblock %}

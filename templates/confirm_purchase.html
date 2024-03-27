@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Confirm
+{% endblock %}
+
+{% block main %}
+    <h4>Confirm Purchase</h4>
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> {{ info['symbol'] }} </td>
+                <td> {{ info['name'] }} </td>
+                <td> {{ shares }} </td>
+                <td> {{ info['price'] | usd}} </td>
+                <td class='table-warning'> {{ cost_or_return
+                     | usd}} </td>
+            </tr>
+            <tr class='table-warning'>
+                <td colspan="4"> Current Cash </td>
+                <td> {{ cash | usd }} </td>
+            </tr>
+            <tr class='table-danger'>
+                <td colspan="4"> After Purchase </td>
+                <td> {{ rest | usd }} </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form action="/confirm_purchase" method="post">
+        <input name="info" type="hidden" value="{{ info }}">
+        <input name="shares" type="hidden" value="{{ shares }}">
+        <input name="cost_or_return" type="hidden" value="{{ cost_or_return }}">
+        <input name="cash" type="hidden" value="{{ cash }}">
+        <input name="rest" type="hidden" value="{{ rest }}">
+        <button class="btn btn-primary" type="submit">Confirm Purchase</button>
+    </form>
+{% endblock %}

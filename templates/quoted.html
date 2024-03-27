@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> {{ info['symbol'] }} </td>
+                <td> {{ info['name'] }} </td>
+                <td> 1 </td>
+                <td> {{ info['price'] | usd}} </td>
+                <td> {{ info['price'] | usd}} </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

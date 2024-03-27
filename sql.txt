@@ -1,0 +1,5 @@
+SELECT symbol, SUM(shares) AS shares FROM purchase_and_sale WHERE user_id = 6 GROUP BY symbol HAVING SUM(shares) > 0
+
+
+SELECT symbol, SUM(shares) AS shares FROM purchase_and_sale WHERE user_id = 4 GROUP BY symbol
+HAVING shares >= 0
