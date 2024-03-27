@@ -2,7 +2,7 @@
 
 The deom and detailed explanation of this project it on the way :)
 
-But breifly, the Web Application have the following features:
+Breifly, this Web Application have the following features:
 1. Import real-time stock prices information based on Yahoo-Finance
 2. A user manangement system (using Cookie), including
 - signing up an account
